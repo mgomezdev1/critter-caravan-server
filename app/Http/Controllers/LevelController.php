@@ -20,6 +20,7 @@ class LevelController
         $params = new LevelPaginationParams($queryParams);
 
         $user = JWTAuth::user();
+        $userId = $user?->id ?? 0;
         $isAdmin = $this->isAdmin($user);
 
         $levels = Level::orderBy($params->getSortAttribute(), $params->sortAsc ? 'ASC' : 'DESC');
@@ -39,20 +40,24 @@ class LevelController
             $levels = $levels->where('category', 'LIKE', '%' . $params->category . '%');
         }
 
-        $levels = $levels->where(function ($query) use ($user) {
-            $query->where('private', '=', 0)
-                  ->orWhere('author_id', '=', $user->id);
-        });
+        if (!$isAdmin) {
+            $levels = $levels->where(function ($query) use ($userId) {
+                $query->where('private', '=', 0)
+                      ->orWhere('author_id', '=', $userId);
+            });
+        }
 
         $levels = $levels->paginate($params->perPage);
 
         return response()->json($levels);
     }
 
-    private function isAdmin(User $user) {
+    private function isAdmin(?User $user) {
+        if ($user == null) return false;
         foreach($user->roles as $role) {
             if ($role->name == 'admin') return true;
         }
+        return false;
     }
 
     public function show($id)

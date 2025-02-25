@@ -13,13 +13,7 @@ Route::get('/users/create', function () {
     return view('create');
 });
 Route::post("users/store", function (UserRepository $userRepository, UserController $userController, Request $request) {
-    $data = $request->all();
-
-    $validationResult = $userController->validate($data);
-
-    if (!$validationResult->success) {return response()->json($validationResult, 400);}
-
-    $userRepository->store($data);
+    $response = $userController->store($request);
 
     return redirect('/users');
 });

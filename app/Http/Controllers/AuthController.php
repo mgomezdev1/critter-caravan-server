@@ -18,16 +18,23 @@ class AuthController extends Controller
     // Login method to authenticate user and issue JWT
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
-
         $credentials = $request->only('email', 'password');
+        $login = $credentials['email'];
+        $user = User::where('email', $login)->orWhere('username', $login)->first();
 
-        // Check if credentials are correct
-        if ($token = JWTAuth::attempt($credentials)) {
-            $user = User::where('email', 'like', $credentials["email"])->first();
+        if (!$user) {
+            return response()->json([
+                'message' => 'Invalid credentials'
+            ], 401);
+        }
+
+        $token = JWTAuth::attempt(['email' => $user->email, 'password' => $credentials['password']]);
+        if ($token) {
+            return $this->respondWithToken($token, $user);
+        }
+
+        $token = JWTAuth::attempt(['username' => $user->username, 'password' => $credentials['password']]);
+        if ($token) {
             return $this->respondWithToken($token, $user);
         }
 

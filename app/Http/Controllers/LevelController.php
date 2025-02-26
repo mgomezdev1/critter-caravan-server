@@ -26,7 +26,10 @@ class LevelController
         $levels = Level::orderBy($params->getSortAttribute(), $params->sortAsc ? 'ASC' : 'DESC');
 
         if ($params->author != null) {
-            $levels = $levels->where('author_id', '=', $params->author);
+            $levels = $levels->whereRaw('
+                author_id IN (SELECT id from users
+                WHERE username LIKE "%' . $params->author . '%")
+            '); // SQL INJECTION VULNERABILITY
         }
 
         if ($params->maxVerification >= 0) {

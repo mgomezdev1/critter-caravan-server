@@ -11,5 +11,8 @@ Route::get('/register', function () {
 Route::post('/store', function (Request $request, UserController $userController) {
     $response = $userController->store($request);
 
-    return redirect('/register')->with('data', $response->getData(true));
+    return redirect('/register')->with('data', [
+        'response' => $response->getData(true),
+        'request' => $request->all()
+    ]);
 });

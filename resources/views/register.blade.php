@@ -19,7 +19,7 @@
             <div class="flex flex-col space-y-2 max-w-64">
                 <label for="name">Username:</label>
                 <input type="text" placeholder="Username" id="name" name="username"
-                @isset(session('data')['response']['errors'], session('data')['request']['username'])
+                @isset (session('data')['response']['errors'], session('data')['request']['username'])
                     value="{{session('data')['request']['username']}}"
                 @endisset
                 class="px-2 border-2 dark:bg-black dark:text-white"/>
@@ -28,7 +28,7 @@
                 @endisset
                 <br><label for="email">Email:</label>
                 <input type="text" placeholder="Email" id="email" name="email"
-                @isset( session('data')['response']['errors'], session('data')['request']['email'])
+                @isset (session('data')['response']['errors'], session('data')['request']['email'])
                     value="{{session('data')['request']['email']}}"
                 @endisset
                 class="px-2 border-2 dark:bg-black dark:text-white"/>

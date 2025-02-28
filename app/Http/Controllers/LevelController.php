@@ -25,6 +25,10 @@ class LevelController
 
         $levels = Level::orderBy($params->getSortAttribute(), $params->sortAsc ? 'ASC' : 'DESC');
 
+        if ($params->name != null) {
+            $levels = $levels->where('name', 'LIKE', '%' . $params->name . '%');
+        }
+
         if ($params->author != null) {
             $levels = $levels->whereRaw('
                 author_id IN (SELECT id from users
@@ -50,7 +54,7 @@ class LevelController
             });
         }
 
-        $levels = $levels->paginate($params->perPage);
+        $levels = $levels->paginate($params->perPage)->withQueryString();
 
         return response()->json($levels);
     }

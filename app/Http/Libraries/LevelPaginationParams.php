@@ -15,6 +15,7 @@ class LevelPaginationParams
     public int $perPage;
     public SortBy $sortBy;
     public bool $sortAsc;
+    public ?string $name;
     public ?string $author;
     public ?string $category;
     public int $minVerification;
@@ -22,13 +23,14 @@ class LevelPaginationParams
 
     public function __construct(array $data)
     {
-        $this->perPage = $data['perPage'] ?? 50;
+        $this->perPage = $data['per_page'] ?? 50;
         $this->sortBy = $this->parseSortBy($data['sort'] ?? null);
-        $this->sortAsc = $data['sortAsc'] ?? false;
+        $this->sortAsc = $data['sort_asc'] ?? false;
+        $this->name = $data['name'] ?? null;
         $this->author = $data['author'] ?? null;
         $this->category = $data['category'] ?? null;
-        $this->minVerification = $data['minVerification'] ?? 0;
-        $this->maxVerification = $data['maxVerification'] ?? -1;
+        $this->minVerification = $data['min_verification'] ?? 0;
+        $this->maxVerification = $data['max_verification'] ?? -1;
     }
 
     public function getSortAttribute()

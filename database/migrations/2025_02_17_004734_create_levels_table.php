@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('author_id')->constrained('users', 'id')->onDelete('cascade');
             $table->string('name');
             $table->boolean('private');
-            $table->string('thumbnail')->nullable();
+            $table->longText('thumbnail')->nullable();
             $table->string('category')->nullable();
             $table->integer('verification_level')->default(0);
-            $table->text('world');
+            $table->longText('world');
             $table->timestamps();
         });
     }

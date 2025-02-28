@@ -23,7 +23,8 @@ class LevelController
         $userId = $user?->id ?? 0;
         $isAdmin = $this->isAdmin($user);
 
-        $levels = Level::orderBy($params->getSortAttribute(), $params->sortAsc ? 'ASC' : 'DESC');
+        $sortAttr = $params->getSortAttribute();
+        $levels = Level::orderBy($sortAttr, $params->sortAsc ? 'ASC' : 'DESC');
 
         if ($params->name != null) {
             $levels = $levels->where('name', 'LIKE', '%' . $params->name . '%');
@@ -33,7 +34,7 @@ class LevelController
             $levels = $levels->whereRaw('
                 author_id IN (SELECT id from users
                 WHERE username LIKE "%' . $params->author . '%")
-            '); // SQL INJECTION VULNERABILITY
+            '); //SQL INJECTION VULNERABILITY
         }
 
         if ($params->maxVerification >= 0) {
@@ -93,7 +94,7 @@ class LevelController
 
     public function store(Request $request)
     {
-        // Validate user input
+        //Validate user input
         try {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -103,7 +104,7 @@ class LevelController
                 'world' => 'required|string',
             ]);
         } catch (ValidationException $e) {
-            // Handle validation error
+            //Handle validation error
             return response()->json([
                 'message' => 'Validation Error',
                 'errors' => $e->errors()
@@ -112,7 +113,7 @@ class LevelController
 
         $user = JWTAuth::user();
 
-        // Create the user
+        //Create the user
         $level = Level::create([
             'name' => $validated['name'],
             'private' => $validated['private'],
@@ -128,6 +129,7 @@ class LevelController
 
     public function update(Request $request, $id)
     {
+        //Validate user input
         try {
             $validated = $request->validate([
                 'name' => 'string|max:255',
@@ -137,7 +139,7 @@ class LevelController
                 'world' => 'string',
             ]);
         } catch (ValidationException $e) {
-            // Handle validation error
+            //Handle validation error
             return response()->json([
                 'message' => 'Validation Error',
                 'errors' => $e->errors()

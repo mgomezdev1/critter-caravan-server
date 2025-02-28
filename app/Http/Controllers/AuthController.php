@@ -6,16 +6,12 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Models\User;
-use Carbon\Carbon;
 use DateInterval;
 use DateTime;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
-class AuthController extends Controller
+class AuthController
 {
-    // Login method to authenticate user and issue JWT
+    //Login method to authenticate user and issue JWT
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -43,25 +39,25 @@ class AuthController extends Controller
         ], 401);
     }
 
-    // Logout method to invalidate the token
-    public function logout(Request $request)
+    //Logout method to invalidate the token
+    public function logout()
     {
         try {
-            // Invalidate the current JWT token
+            //Invalidate the current JWT token
             JWTAuth::invalidate(JWTAuth::getToken());
             return response()->json(null, 200);
-        } catch (JWTException $exception) {
+        } catch (JWTException $e) {
             return response()->json([
                 'message' => 'Failed to logout, please try again'
             ], 401);
         }
     }
 
-    // Refresh method to refresh the JWT token
+    //Refresh method to refresh the JWT token
     public function refresh()
     {
         try {
-            // Refresh the token and return it
+            //Refresh the token and return it
             $user = JWTAuth::user();
             $newToken = JWTAuth::refresh(JWTAuth::getToken());
             return $this->respondWithToken($newToken, $user);
@@ -72,11 +68,11 @@ class AuthController extends Controller
         }
     }
 
-    // Me method to get the authenticated user
+    //Me method to get the authenticated user
     public function me()
     {
         try {
-            // Get the currently authenticated user
+            //Get the currently authenticated user
             $user = JWTAuth::user();
 
             if ($user == null) {
@@ -85,7 +81,7 @@ class AuthController extends Controller
                 ], 401);
             }
             return response()->json($user->load('roles'));
-        } catch (JWTException $exception) {
+        } catch (JWTException $e) {
             return response()->json([
                 'message' => 'Unable to fetch user data'
             ], 500);

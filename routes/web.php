@@ -25,7 +25,7 @@ Route::get('/levels', function (LevelController $levelController) {
 })->name('levels');
 
 Route::get('/search', function (Request $request) {
-    //convert form params to query params
+    //Convert form params to query params
     $queryParams = [];
     foreach ($request->only('name', 'per_page', 'sort', 'author', 'category', 'min_verification', 'max_verification') as $key => $value) {
         $queryParams[$key] = $value;

@@ -26,7 +26,7 @@ class UserController
 
     public function store(Request $request)
     {
-        // Validate user input
+        //Validate user input
         try {
             $validated = $request->validate([
                 'username' => 'required|string|max:255|unique:users,username',
@@ -34,21 +34,21 @@ class UserController
                 'password' => 'required|string|min:6',
             ]);
         } catch (ValidationException $e) {
-            // Handle validation error
+            //Handle validation error
             return response()->json([
                 'message' => 'Validation Error',
                 'errors' => $e->errors()
             ], 400);
         }
 
-        // Create the user
+        //Create the user
         $user = User::create([
             'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => $validated['password'],
         ]);
 
-        // Assign the "user" role by default
+        //Assign the "user" role by default
         $userRoles = Role::where('name', 'user');
         error_log(json_encode($userRoles));
         $user->roles()->attach($userRoles->first());

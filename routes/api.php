@@ -3,7 +3,6 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LevelController;
-use App\Http\Middleware\HandleValidation;
 use App\Http\Middleware\RequireOwnLevelOrRole;
 use App\Http\Middleware\RequireRole;
 use App\Http\Middleware\RequireSelfOrRole;

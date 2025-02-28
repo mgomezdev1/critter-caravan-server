@@ -2,8 +2,6 @@
 
 This is the backend service for the Critter Caravan Project. Ensure this is running if you intend to run the game locally on your machine.
 
-The
-
 ## Prerequisites and Setup
 
 To set up the server, you will need to install **Laravel v11** with **composer**, and **PHP v8**. You can do this by following the instructions [here](https://laravel.com/docs/11.x/installation).
@@ -87,7 +85,8 @@ Then, JWTAuth will need to create a token for you to sign JWT tokens with, you c
 
 For a simple testing setup, you can use sqlite. If you already have a MySQL server running, feel free to use that instead. The setup in the environment file is slightly different.
 
-* SQLite
+#### SQLite
+
 Create a `db.sqlite` file somewhere in your system. If you create it in the root directory of the repository; it is set to be automatically git-ignored.
 
 In the environment file, you will need to set up the following values:
@@ -97,7 +96,8 @@ DB_DATABASE="absolute/path/to/your/db.sqlite"
 DB_FOREIGN_KEYS=true
 ```
 
-* MySQL
+#### MySQL
+
 You will need to know the credentials to your database, simply assign those values in the environment
 ```env
 DB_CONNECTION=mysql

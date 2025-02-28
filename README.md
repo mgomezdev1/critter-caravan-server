@@ -8,6 +8,8 @@ The
 
 To set up the server, you will need to install **Laravel v11** with **composer**, and **PHP v8**. You can do this by following the instructions [here](https://laravel.com/docs/11.x/installation).
 
+For certain components, you may also need **Node.js** and **SQLite/MySQL**.
+
 Then, to install the local packages, run `composer install`.
 
 Set up your environment properly; the following is an example, but the values are known to work.

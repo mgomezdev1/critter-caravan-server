@@ -160,7 +160,7 @@ class LevelController
 
     public function destroy($id)
     {
-        $this->levelRepository->show($id);
+        $this->levelRepository->destroy($id);
         return response()->json(null, 204);
     }
 }

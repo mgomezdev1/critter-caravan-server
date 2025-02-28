@@ -65,7 +65,7 @@ class UserController
 
     public function destroy($id)
     {
-        $this->userRepository->show($id);
+        $this->userRepository->destroy($id);
         return response()->json(null, 204);
     }
 }

@@ -12,7 +12,7 @@ Then, to install the local packages, run `composer install`.
 
 Set up your environment properly; the following is an example, but the values are known to work.
 
-```
+```env
 APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:8qxgNw8gGy7drYHJ4Qyvm9lsWxcnRir07AEZltkHQpY=

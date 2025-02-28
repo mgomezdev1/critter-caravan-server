@@ -10,7 +10,7 @@ For certain components, you may also need **Node.js** and **SQLite/MySQL**.
 
 Then, to install the local packages, run `composer install`.
 
-Set up your environment properly; the following is an example, but the values are known to work.
+Set up your environment (`.env` file) properly; the following is an example, but the values are known to work.
 
 ```env
 APP_NAME=Laravel

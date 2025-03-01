@@ -108,7 +108,7 @@
             </div>
         </form>
         <div class="m-4">Showing {{$data['from']}} to {{$data['to']}} of {{$data['total']}} total results</div>
-        <div class="flex">
+        <div class="flex flex-row align-self-stretch flex-wrap justify-center gap-4">
             @foreach ($data['data'] as $level)
                 <div
                     style="text-shadow: -1px -1px 3px #000, 1px -1px 3px #000, -1px 1px 3px #000, 1px 1px 3px #000"

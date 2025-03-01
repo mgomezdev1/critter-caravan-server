@@ -8,7 +8,7 @@
     $verificationLevels = [
         -1 => ["Any", "#ffffff"],
         0 => ["Unverified", "#ff6666"],
-        1 => ["Verified", "#00ff00"],
+        1 => ["Verified", "#ffffff"],
         2 => ["Ranked", "#00ff00"],
         3 => ["Featured", "#ffcc00"],
         4 => ["Official", "#00ffff"]
@@ -113,7 +113,7 @@
                 <div
                     style="text-shadow: -1px -1px 3px #000, 1px -1px 3px #000, -1px 1px 3px #000, 1px 1px 3px #000"
                     class="rounded-xl mx-2 border-2 relative overflow-hidden w-[480px] h-[270px] flex flex-col justify-between
-                    @if ($level['verification_level'] == 2)
+                    @if ($level['verification_level'] == 3)
                         border-[#ffcc00]
                     @endif
                     text-white hover:bg-[#8885]"
